@@ -9,17 +9,12 @@ namespace MonopolySimulator
         {
             //ChanceDeck deck = new ChanceDeck();
             //deck.SwapCards();
-            Console.WriteLine("Hello World!");
-            LinkedList<String> linked = new LinkedList<string>();
-            linked.AddFirst("One");
-            linked.AddFirst("Two");
-            linked.AddFirst("Three");
-            linked.AddAfter(linked.Last, "FOUR");
-
-            foreach (String s in linked)
-            {
-                Console.WriteLine(s);
-            }
+            LinkedList<Player> GamePlayers = new LinkedList<Player>();
+            GamePlayers.AddFirst(new Player("Lachlan"));
+            GamePlayers.AddFirst(new Player("Kate"));
+            GameController game = new GameController(GamePlayers);
+            game.InitialRoll();
+            game.PlayTurn();
 
             Console.ReadLine();
         }

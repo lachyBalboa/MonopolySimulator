@@ -10,6 +10,7 @@ namespace MonopolySimulator
         public Byte SpacesToMove { get; set; }
         public Byte CurrentIndex { get; set; }
         public int TotalFunds { get; set; }
+        public Space CurrentSpace { get; set; }
         const int StartingFunds = 1500;
         public Player(String name)
         {
@@ -26,6 +27,26 @@ namespace MonopolySimulator
         public void Move(Byte SpacesToMove)
         {
             CurrentIndex += SpacesToMove;
+        }
+
+        public String GetSummary()
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append(this.PlayerName);
+            builder.Append(" is on ");
+            builder.Append(this.CurrentSpace.Name);
+            builder.Append(" at index ");
+            builder.Append(this.CurrentIndex);
+            builder.Append("\n");
+            builder.Append("Current Money: ");
+            builder.Append(this.TotalFunds);
+
+            return builder.ToString();
+        }
+
+        public override string ToString()
+        {
+            return this.PlayerName;
         }
     }
 }

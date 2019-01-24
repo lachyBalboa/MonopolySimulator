@@ -24,7 +24,13 @@ namespace MonopolySimulator
 
         }
 
-        
+        public override string ToString()
+        {
+            // expand ToString to include detailed space info.
+            return this.Name;
+        }
+
+
     }
 
     class Property : Space

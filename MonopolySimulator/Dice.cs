@@ -13,10 +13,11 @@ namespace MonopolySimulator
         public Byte Roll()
         {
             Random r = new Random();
-            int rollValue = r.Next(2, 12); // Two dice cannot output 1.
+            int rollValue = r.Next(2, 3); // Two dice cannot output 1.
             RollHistory.Add(rollValue);
             TimesRolled++;
-            return (Byte) rollValue;
+            CurrentValue = (Byte)rollValue;
+            return CurrentValue;
         }
     }
 }
