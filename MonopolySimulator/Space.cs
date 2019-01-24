@@ -11,6 +11,7 @@ namespace MonopolySimulator
         public int TimesLanded = 0;
         public String SpaceType;
         public List<Player> PlayersOnSpace = new List<Player>();
+        public short RentPrice { get; set; }
         public Space (string name)
         {
             Name = name;
@@ -22,6 +23,11 @@ namespace MonopolySimulator
             PlayersOnSpace.Add(player);
             TimesLanded++;
 
+        }
+
+        public void RemovePlayerFromSpace(Player player)
+        {
+            PlayersOnSpace.Remove(player);
         }
 
         public override string ToString()
@@ -37,7 +43,7 @@ namespace MonopolySimulator
     {
         String Color { get; set; } // define or use prebuilt color type?
         short PurchasePrice { get; set; }
-        short RentPrice { get; set; }
+        //public short RentPrice { get; set; }
         
         public Property (String name, String color, short purchasePrice, short rentPrice)
             : base(name)

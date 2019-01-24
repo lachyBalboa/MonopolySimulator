@@ -14,6 +14,7 @@ namespace MonopolySimulator
         }
         public MonopolyBoard()
         {
+            // Rent prices need adjustment
             Spaces[0] = new SpecialSpace("Go");
             Spaces[1] = new Property("Old Kent Road", "Brown", 60, 2);
             Spaces[2] = new CommunityChest();
@@ -25,7 +26,17 @@ namespace MonopolySimulator
             Spaces[8] = new Property("Vermont Avenue", "Light Blue", 160, 10);
             Spaces[9] = new Property("Conneticut Avenue", "Light Blue", 180, 12);
             Spaces[10] = new SpecialSpace("Jail");
-        }
+            Spaces[11] = new Property("St. Charles Place", "Purple", 140, 15);
+            Spaces[12] = new Property("Electric Company", "White", 140, 10); // Add class for utilities
+            Spaces[13] = new Property("States Avenue", "Purple", 150, 10);
+            Spaces[14] = new Property("Virginia Avenue", "Purple", 160, 20);
+            Spaces[15] = new Property("Pennsylvania Railroad", "Black", 200, 25); // Add class for railways
+            Spaces[16] = new Property("St. James Place", "Orange", 180, 20);
+            Spaces[17] = new CommunityChest();
+            Spaces[18] = new Property("Tennessee Avenue", "Orange", 180, 20);
+            Spaces[19] = new Property("New York Avenue", "Orange", 200, 22);
+            Spaces[20] = new SpecialSpace("Free Parking");
+         }
 
         public void AddPlayerToSpace(Player player)
         {
@@ -35,8 +46,13 @@ namespace MonopolySimulator
             Console.WriteLine(Spaces[player.CurrentIndex].Name);
             foreach(Player p in Spaces[player.CurrentIndex].PlayersOnSpace)
             {
-                Console.WriteLine(p);
+                Console.WriteLine("\t - " + p);
             }
+        }
+
+        public void RemovePlayerFromSpace(Player player)
+        {
+            
         }
     }
 }

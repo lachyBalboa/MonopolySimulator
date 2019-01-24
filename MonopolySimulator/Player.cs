@@ -44,6 +44,11 @@ namespace MonopolySimulator
             return builder.ToString();
         }
 
+        public void PayMoney(int amountToPay)
+        {
+            this.TotalFunds = this.TotalFunds - amountToPay;
+        }
+
         public override string ToString()
         {
             return this.PlayerName;

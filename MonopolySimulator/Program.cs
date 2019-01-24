@@ -14,7 +14,13 @@ namespace MonopolySimulator
             GamePlayers.AddFirst(new Player("Kate"));
             GameController game = new GameController(GamePlayers);
             game.InitialRoll();
-            game.PlayTurn();
+            
+            while (game.GameIsOn)
+            {
+                game.PlayTurn();
+                Console.ReadKey();
+            }
+            
 
             Console.ReadLine();
         }

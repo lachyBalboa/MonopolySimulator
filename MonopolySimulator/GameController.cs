@@ -14,7 +14,7 @@ namespace MonopolySimulator
         ChanceDeck ChanceDeck = new ChanceDeck();
         Player PlayerToMove;
         Space[] Spaces = new Space[40]; // Spaces will not change
-
+        public bool GameIsOn = true;
         public GameController(LinkedList<Player> players)
         {
             Players = players;
@@ -46,12 +46,12 @@ namespace MonopolySimulator
             PlayerToMove.SpacesToMove = GameDice.Roll();
             Console.Write("Rolled ");
             Console.WriteLine(GameDice.CurrentValue);
-            Console.WriteLine("Moving " + PlayerToMove.SpacesToMove + " spaces.");
+            Console.WriteLine("Moving " + PlayerToMove.SpacesToMove + " spaces. \n");
             PlayerToMove.Move(); // Increase players index
             while (PlayerToMove.SpacesToMove > 0)
             {
 
-                Board.AddPlayerToSpace(PlayerToMove); // Add player to list of players on that space
+                //Board.AddPlayerToSpace(PlayerToMove); // Add player to list of players on that space
                 PlayerToMove.CurrentSpace = GetSpaceForPlayer(PlayerToMove);
 
                 Console.Write(PlayerToMove.PlayerName);
@@ -59,7 +59,8 @@ namespace MonopolySimulator
                 Console.WriteLine(PlayerToMove.CurrentSpace.ToString());
 
                 CheckPosition(); // Check to space to see what is there
-
+                Console.WriteLine("Moving " + PlayerToMove.SpacesToMove + " spaces.");
+                PlayerToMove.Move(); // Increase players index
                 // If side effect of space e.g. chance card - causes player to move again, 
                 // loop. Else EndTurn();
             }
@@ -85,17 +86,15 @@ namespace MonopolySimulator
             else if (currentSpace.SpaceType.Equals("CommunityChest"))
                 spacesToMove = 2;
             else if (currentSpace.SpaceType.Equals("Property"))
-                spacesToMove = 0; // Implement propery strategy? CheckIfBuy();
+            {
+                spacesToMove = 0;
+                PlayerToMove.PayMoney(currentSpace.RentPrice);
+            }
+            // Implement propery strategy? CheckIfBuy();
             else if (currentSpace.SpaceType.Equals("Tax"))
                 spacesToMove = 0;
 
             spaceDetails = currentSpace.ToString();
-            Console.Write(PlayerToMove.PlayerName);
-            Console.Write(" landed on: ");
-            Console.Write(currentSpace.SpaceType);
-            Console.Write(" and will move ");
-            Console.Write(spacesToMove);
-            Console.WriteLine(" spaces.");
             PlayerToMove.SpacesToMove = spacesToMove;
         }
 
@@ -108,12 +107,12 @@ namespace MonopolySimulator
         public void EndTurn()
         {
             // Move current player to the bottom of the players list
-            Console.WriteLine("Ending turn for Kate");
+            Console.Write("Ending turn for");
+            Console.WriteLine(PlayerToMove);
             Console.WriteLine("Summary: ");
             Console.WriteLine(Players.First.Value.GetSummary());
             Players.RemoveFirst();
             Players.AddAfter(Players.Last, PlayerToMove);        
-            Console.WriteLine(Players.First.Value.PlayerName);
 
         }
     }
