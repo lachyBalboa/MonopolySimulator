@@ -19,6 +19,12 @@ namespace MonopolySimulator
             Spaces[2] = new CommunityChest();
             Spaces[3] = new Property("Whitechapel Road", "Brown",60, 4);
             Spaces[4] = new Tax("Income Tax", 200);
+            Spaces[5] = new Property("Redding Railroad", "Black", 200, 25);
+            Spaces[6] = new Property("Oriental Avenue", "Light Blue", 160, 10);
+            Spaces[7] = new Chance();
+            Spaces[8] = new Property("Vermont Avenue", "Light Blue", 160, 10);
+            Spaces[9] = new Property("Conneticut Avenue", "Light Blue", 180, 12);
+            Spaces[10] = new SpecialSpace("Jail");
         }
 
         public void AddPlayerToSpace(Player player)

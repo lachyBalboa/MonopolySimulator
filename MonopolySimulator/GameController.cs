@@ -46,10 +46,10 @@ namespace MonopolySimulator
             PlayerToMove.SpacesToMove = GameDice.Roll();
             Console.Write("Rolled ");
             Console.WriteLine(GameDice.CurrentValue);
+            Console.WriteLine("Moving " + PlayerToMove.SpacesToMove + " spaces.");
+            PlayerToMove.Move(); // Increase players index
             while (PlayerToMove.SpacesToMove > 0)
             {
-                Console.WriteLine("Moving " + PlayerToMove.SpacesToMove + " spaces.");
-                PlayerToMove.Move(); // Increase players index
 
                 Board.AddPlayerToSpace(PlayerToMove); // Add player to list of players on that space
                 PlayerToMove.CurrentSpace = GetSpaceForPlayer(PlayerToMove);
