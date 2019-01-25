@@ -29,6 +29,11 @@ namespace MonopolySimulator
             CurrentIndex += SpacesToMove;
         }
 
+        public void MoveIndex(Byte index)
+        {
+            CurrentIndex = index;
+        }
+
         public String GetSummary()
         {
             StringBuilder builder = new StringBuilder();
@@ -40,7 +45,7 @@ namespace MonopolySimulator
             builder.Append("\n");
             builder.Append("Current Money: ");
             builder.Append(this.TotalFunds);
-
+            builder.Append("\n");
             return builder.ToString();
         }
 

@@ -36,7 +36,28 @@ namespace MonopolySimulator
             Spaces[18] = new Property("Tennessee Avenue", "Orange", 180, 20);
             Spaces[19] = new Property("New York Avenue", "Orange", 200, 22);
             Spaces[20] = new SpecialSpace("Free Parking");
+            Spaces[21] = new Property("Kentucky Avenue", "Red", 220, 30);
+            Spaces[22] = new Chance();
+            Spaces[23] = new Property("Indiana Avenue", "Red", 220, 30);
+            Spaces[24] = new Property("Illinois Avenue", "Red", 240, 32);
+            Spaces[25] = new Property("B&O Railroad", "Black", 200, 25);
+            Spaces[26] = new Property("Atlantic Avenue", "Yellow", 260, 26);
+            Spaces[27] = new Property("Ventor Avenue", "Yellow", 260, 26);
+            Spaces[28] = new Property("Water Works", "White", 150, 15);
+            Spaces[29] = new Property("Marvin Gardens", "Yellow", 280, 28);
+            Spaces[30] = new SpecialSpace("Go To Jail");
+            Spaces[31] = new Property("Pacific Avenue", "Green", 300, 30);
+            Spaces[32] = new Property("North Carolina Avenue", "Green", 300, 30);
+            Spaces[33] = new CommunityChest();
+            Spaces[34] = new Property("Pennsylvania Avenue", "Green", 320, 32);
+            Spaces[35] = new Property("Short Line", "Black", 200, 25);
+            Spaces[36] = new Chance();
+            Spaces[37] = new Property("Park Place", "Dark Blue", 350, 35);
+            Spaces[38] = new Tax("Special Tax", 100);
+            Spaces[39] = new Property("Boardwalk", "Dark Blue", 400, 50);
+
          }
+        
 
         public void AddPlayerToSpace(Player player)
         {

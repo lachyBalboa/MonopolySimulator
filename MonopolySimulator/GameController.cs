@@ -9,12 +9,16 @@ namespace MonopolySimulator
     {
         LinkedList<Player> Players = new LinkedList<Player>();
         MonopolyBoard Board = new MonopolyBoard();
-        Dice GameDice = new Dice();
+        Dice GameDice1 = new Dice();
+        Dice GameDice2 = new Dice();
         CommunityChestDeck CommunityChestDeck = new CommunityChestDeck();
         ChanceDeck ChanceDeck = new ChanceDeck();
         Player PlayerToMove;
         Space[] Spaces = new Space[40]; // Spaces will not change
         public bool GameIsOn = true;
+        const Byte JailIndex = 10;
+        bool DoublesRolled;
+        bool DoublesRolledThreeTimes;
         public GameController(LinkedList<Player> players)
         {
             Players = players;
@@ -23,10 +27,10 @@ namespace MonopolySimulator
         {   
             foreach(Player p in Players)
             {
-                p.SpacesToMove = GameDice.Roll();
+                p.SpacesToMove = GameDice1.Roll();
                 Console.Write(p);
                 Console.Write("'s initial roll is: ");
-                Console.WriteLine(GameDice.CurrentValue);
+                Console.WriteLine(GameDice1.CurrentValue);
             }
 
             // Sort players list based on who rolled a greater amount
@@ -37,20 +41,39 @@ namespace MonopolySimulator
 
         }
 
+        public void RollBothDice()
+        {
+            Byte roll1 = GameDice1.Roll();
+            Byte roll2 = GameDice2.Roll();
+            Console.Write("Rolled ");
+            Console.Write(roll1);
+            Console.Write(" and ");
+            Console.Write(roll2);
+            PlayerToMove.SpacesToMove += (Byte)(roll1 + roll2);
+            if (roll1 == roll2)
+            {
+                DoublesRolled = true;
+
+            }
+        }
+
         public void PlayTurn()
         {
             PlayerToMove = Players.First.Value;
             Console.Write(PlayerToMove.PlayerName);
             Console.WriteLine(" is rolling ...");
 
-            PlayerToMove.SpacesToMove = GameDice.Roll();
-            Console.Write("Rolled ");
-            Console.WriteLine(GameDice.CurrentValue);
+            RollBothDice();
+
             Console.WriteLine("Moving " + PlayerToMove.SpacesToMove + " spaces. \n");
             PlayerToMove.Move(); // Increase players index
-            while (PlayerToMove.SpacesToMove > 0)
+            while (PlayerToMove.SpacesToMove > 0 || DoublesRolled == true)
             {
-
+                if (DoublesRolledThreeTimes)
+                {
+                    PlayerToMove.MoveIndex(JailIndex); // Go to jail if doubles rolled three times. End turn.
+                    break;
+                }
                 //Board.AddPlayerToSpace(PlayerToMove); // Add player to list of players on that space
                 PlayerToMove.CurrentSpace = GetSpaceForPlayer(PlayerToMove);
 
