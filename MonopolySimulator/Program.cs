@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MonopolySimulator
 {
@@ -13,15 +14,20 @@ namespace MonopolySimulator
             GamePlayers.AddFirst(new Player("Lachlan"));
             GamePlayers.AddFirst(new Player("Kate"));
             GameController game = new GameController(GamePlayers);
-            game.InitialRoll();
             
             while (game.GameIsOn)
-            {
-                game.PlayTurn();
+            {   
+                
+                game.PlayTurn(GamePlayers.First.Value);
+                game.SwapPlayers(GamePlayers);
                 Console.ReadKey();
+                if (GamePlayers.Any(p => p.TotalFunds <= 0))
+                {
+                    game.GameIsOn = false;
+                }
             }
-            
 
+            Console.WriteLine("Game is over");
             Console.ReadLine();
         }
     }

@@ -13,7 +13,7 @@ namespace MonopolySimulator
         public Byte Roll()
         {
             Random r = new Random();
-            int rollValue = r.Next(1, 6); // Two dice cannot output 1.
+            int rollValue = r.Next(1, 7); // MaxValue is not inclusive, must set to 7 to allow roll of 6.
             RollHistory.Add(rollValue);
             TimesRolled++;
             CurrentValue = (Byte)rollValue;

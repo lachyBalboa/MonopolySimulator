@@ -7,10 +7,11 @@ namespace MonopolySimulator
     class MonopolyBoard
     {
         public Space[] Spaces = new Space[40];
+        public Byte Length { get; set; }
         public MonopolyBoard (Space[] spaces)
         {
-            
             Spaces = spaces;
+            Length = (Byte)Spaces.Length;
         }
         public MonopolyBoard()
         {

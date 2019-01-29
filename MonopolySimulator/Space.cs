@@ -93,6 +93,15 @@ namespace MonopolySimulator
         }
     }
 
+    class GoToJail : Space
+    {
+        public GoToJail(String name) : base(name)
+        {
+            base.Name = name;
+            SpaceType = "Go To Jail";
+        }
+    }
+
     public enum SpecialSpaces
     {
         Go,
