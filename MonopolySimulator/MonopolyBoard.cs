@@ -64,11 +64,18 @@ namespace MonopolySimulator
         {
             // Add player to space
             Spaces[player.CurrentIndex].AddPlayerToSpace(player);
-            Console.Write("Players on space: ");
-            Console.WriteLine(Spaces[player.CurrentIndex].Name);
-            foreach(Player p in Spaces[player.CurrentIndex].PlayersOnSpace)
+        }
+
+        public void ReportPlayerPositions()
+        {
+            foreach (Space s in Spaces)
             {
-                Console.WriteLine("\t - " + p);
+                //if (s.PlayersOnSpace.Length > 0)
+                //{
+                //    Console.Write(s.Name);
+                //    Console.Write(" : ");
+                //    Console.WriteLine(s.ToString());
+                //}
             }
         }
 

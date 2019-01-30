@@ -19,6 +19,8 @@ namespace MonopolySimulator
         public bool HasRolledDoublesThreeTimes { get; set; }
         public bool TurnHasEnded { get; set; }
         public Byte InitialRollValue { get; set; }
+        public int TurnsPlayed { get; set; }
+        public List<Byte> RollsHistory = new List<byte>();
         
         public Player(String name)
         {
@@ -29,6 +31,7 @@ namespace MonopolySimulator
         public void StartTurn()
         {
             this.TurnHasEnded = false;
+            this.TurnsPlayed++;
         }
 
         public void Move()
@@ -43,8 +46,6 @@ namespace MonopolySimulator
             else
                 this.CurrentIndex += spacesToMove;
             this.CurrentSpace = board.Spaces[CurrentIndex];
-            Console.WriteLine("Landed on:");
-            Console.WriteLine(this.CurrentSpace);
         }
 
         public Byte GetPlayerIndexAtStartOfBoard(MonopolyBoard board)
@@ -73,12 +74,17 @@ namespace MonopolySimulator
             Dice GameDice2 = new Dice();
             Byte roll1 = GameDice1.Roll();
             Byte roll2 = GameDice2.Roll();
+
+            //RollsHistory.Add(roll1);
+            //RollsHistory.Add(roll2);
+            
             Console.Write("Rolled ");
             Console.Write(roll1);
             Console.Write(" and ");
             Console.WriteLine(roll2);
             if (roll1 == roll2)
             {
+                Console.WriteLine("DOUBLES!");
                 this.HasRolledDoubles = true;
             }
 
@@ -88,27 +94,26 @@ namespace MonopolySimulator
         public void CheckPosition(MonopolyBoard board)
         {
             Space currentSpace = board.Spaces[this.CurrentIndex];
-
-            if (currentSpace.SpaceType.Equals("Chance"))
-                this.Move(4, board); // Draw card
-            else if (currentSpace.SpaceType.Equals("CommunityChest"))
-                this.Move(2, board);
-            else if (currentSpace.SpaceType.Equals("Property"))
-            {
-                this.Move(0, board);
-                this.PayMoney(currentSpace.RentPrice);
-            }
-            // Implement propery strategy? CheckIfBuy();
-            else if (currentSpace.SpaceType.Equals("Tax"))
-                this.Move(0, board);
-            else if (currentSpace.SpaceType.Equals("Go To Jail"))
+//            board.AddPlayerToSpace(this);
+            //if (currentSpace.SpaceType.Equals("Chance"))
+            //    this.Move(4, board); // Draw card
+            //else if (currentSpace.SpaceType.Equals("CommunityChest"))
+            //    this.Move(2, board);
+            //else if (currentSpace.SpaceType.Equals("Property"))
+            //{
+            //    this.Move(0, board);
+            //    this.PayMoney(currentSpace.RentPrice);
+            //}
+            //// Implement propery strategy? CheckIfBuy();
+            //else if (currentSpace.SpaceType.Equals("Tax"))
+            //    this.Move(0, board);
+            if (currentSpace.SpaceType.Equals("Go To Jail"))
             {
                 this.MoveIndex(10);
                 this.IsInJail = true;
             }
 
             board.AddPlayerToSpace(this);
-            
         }
 
         public String GetSummary()

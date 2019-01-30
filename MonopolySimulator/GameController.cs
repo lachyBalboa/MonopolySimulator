@@ -13,7 +13,7 @@ namespace MonopolySimulator
         ChanceDeck ChanceDeck = new ChanceDeck();
         Space[] Spaces = new Space[40]; // Spaces will not change
         public bool GameIsOn = true;
-
+        public int TurnsPlayed;
         public GameController(LinkedList<Player> players)
         {
             Players = players;
@@ -38,10 +38,10 @@ namespace MonopolySimulator
 
         public void PlayTurn(Player player)
         {
+            TurnsPlayed++;
             Console.Write("Playing turn for: ");
             Console.WriteLine(player);
             player.StartTurn();
-            Byte currentIndex = player.CurrentIndex;
             while (!player.TurnHasEnded)
             {
                 player.HasRolledDoubles = false;
@@ -54,7 +54,6 @@ namespace MonopolySimulator
                 }
 
                 player.Move(rollValue, Board);
-                Board.AddPlayerToSpace(player);
                 player.CheckPosition(Board);
 
                 if (player.HasRolledDoubles)
@@ -67,6 +66,7 @@ namespace MonopolySimulator
             }
 
             player.EndTurn();
+            Console.WriteLine(player.CurrentSpace);
         }
        
         public Space GetSpaceForPlayer(Player player)
@@ -80,6 +80,28 @@ namespace MonopolySimulator
             Player tempPlayer = players.First.Value;
             players.RemoveFirst();
             players.AddAfter(players.Last, tempPlayer);
+        }
+
+        public void PrintGameSummary()
+        {
+            IOrderedEnumerable<Space> SpacesInOrderOfTimesLanded = Board.Spaces.OrderByDescending(s => s.TimesLanded);
+            Console.WriteLine("Game Summary");
+            Console.Write("Turns played: ");
+            Console.WriteLine(TurnsPlayed);
+            foreach (Player p in Players)
+            {
+                Console.Write(p);
+                Console.Write(" turns played: ");
+                Console.WriteLine(p.TurnsPlayed);
+            }
+
+            Console.WriteLine("Most used Spaces: ");
+            foreach(Space s in SpacesInOrderOfTimesLanded)
+            {
+                Console.Write(s);
+                Console.Write(" : ");
+                Console.WriteLine(s.TimesLanded);
+            }
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-
 namespace MonopolySimulator
 {
     class Space
@@ -11,6 +9,7 @@ namespace MonopolySimulator
         public int TimesLanded = 0;
         public String SpaceType;
         public List<Player> PlayersOnSpace = new List<Player>();
+        
         public short RentPrice { get; set; }
         public Space (string name)
         {

@@ -21,6 +21,11 @@ namespace MonopolySimulator
                 game.PlayTurn(GamePlayers.First.Value);
                 game.SwapPlayers(GamePlayers);
                 Console.ReadKey();
+                if (game.TurnsPlayed >= 20)
+                {
+                    game.PrintGameSummary();
+                    break;
+                }
                 if (GamePlayers.Any(p => p.TotalFunds <= 0))
                 {
                     game.GameIsOn = false;
