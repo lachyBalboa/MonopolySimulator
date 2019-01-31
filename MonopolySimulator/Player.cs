@@ -32,6 +32,8 @@ namespace MonopolySimulator
         {
             this.TurnHasEnded = false;
             this.TurnsPlayed++;
+            Console.Write("Starting Index: ");
+            Console.WriteLine(this.CurrentIndex);
         }
 
         public void Move()
@@ -41,10 +43,15 @@ namespace MonopolySimulator
 
         public void Move(Byte spacesToMove, ref MonopolyBoard board)
         {
-            if (PlayerWillExceedBoardLength(board))
+            //if (PlayerWillExceedBoardLength(board) == true)
+            //    this.CurrentIndex = GetPlayerIndexAtStartOfBoard(board);
+            //else
+            this.CurrentIndex += spacesToMove;
+
+            if (this.CurrentIndex >= board.Length)
+            {
                 this.CurrentIndex = GetPlayerIndexAtStartOfBoard(board);
-            else
-                this.CurrentIndex += spacesToMove; 
+            }
 
             this.CurrentSpace = board.Spaces[CurrentIndex];
             Console.WriteLine("Current index:");
@@ -61,7 +68,11 @@ namespace MonopolySimulator
         }
         public bool PlayerWillExceedBoardLength(MonopolyBoard board)
         {
-            bool result = (this.CurrentIndex + this.SpacesToMove) > board.Length;
+            bool result = (this.CurrentIndex + this.SpacesToMove) >= board.Length;
+            Console.WriteLine("Current index + spacesToMove");
+            Console.WriteLine(this.CurrentIndex + this.SpacesToMove);
+            Console.Title = "Monopoly Simulator";
+            Console.WriteLine(result);
             return result;
         }
 
@@ -84,7 +95,9 @@ namespace MonopolySimulator
             Console.Write("Rolled ");
             Console.Write(roll1);
             Console.Write(" and ");
-            Console.WriteLine(roll2);
+            Console.Write(roll2);
+            Console.Write(" Result: ");
+            Console.WriteLine((Byte)(roll1 + roll2));
             if (roll1 == roll2)
             {
                 Console.WriteLine("DOUBLES!");
