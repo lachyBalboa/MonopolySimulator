@@ -57,7 +57,8 @@ namespace MonopolySimulator
             Spaces[38] = new Tax("Special Tax", 100);
             Spaces[39] = new Property("Boardwalk", "Dark Blue", 400, 50);
 
-         }
+            Length = (Byte)Spaces.Length;
+        }
         
 
         public void AddPlayerToSpace(Player player)

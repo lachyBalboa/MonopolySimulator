@@ -46,14 +46,14 @@ namespace MonopolySimulator
             {
                 player.HasRolledDoubles = false;
                 Byte rollValue = player.RollDice();
-
+                
                 if (!player.AllowPlayerToMoveFromJail() )
                 {
                     player.TurnsInJail++;
                     break;
                 }
 
-                player.Move(rollValue, Board);
+                player.Move(rollValue, ref Board);
                 player.CheckPosition(Board);
 
                 if (player.HasRolledDoubles)

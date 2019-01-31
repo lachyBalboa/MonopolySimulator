@@ -39,13 +39,16 @@ namespace MonopolySimulator
             CurrentIndex += SpacesToMove;
         }
 
-        public void Move(Byte spacesToMove, MonopolyBoard board)
+        public void Move(Byte spacesToMove, ref MonopolyBoard board)
         {
             if (PlayerWillExceedBoardLength(board))
                 this.CurrentIndex = GetPlayerIndexAtStartOfBoard(board);
             else
-                this.CurrentIndex += spacesToMove;
+                this.CurrentIndex += spacesToMove; 
+
             this.CurrentSpace = board.Spaces[CurrentIndex];
+            Console.WriteLine("Current index:");
+            Console.WriteLine(this.CurrentIndex);
         }
 
         public Byte GetPlayerIndexAtStartOfBoard(MonopolyBoard board)
@@ -58,7 +61,7 @@ namespace MonopolySimulator
         }
         public bool PlayerWillExceedBoardLength(MonopolyBoard board)
         {
-            bool result = this.CurrentIndex + this.SpacesToMove > board.Length;
+            bool result = (this.CurrentIndex + this.SpacesToMove) > board.Length;
             return result;
         }
 
