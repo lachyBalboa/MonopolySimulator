@@ -7,11 +7,11 @@ namespace MonopolySimulator
     public class Card
     {
         public String Name { get; set; }
-        public Byte MoveCount { get; set; }
-        public Card(String name, Byte moveCount)
+        public int MoveToIndex { get; set; }
+        public Card(String name, int moveToIndex)
         {
             Name = name;
-            MoveCount = moveCount;
+            MoveToIndex = moveToIndex;
         }
     }
 }

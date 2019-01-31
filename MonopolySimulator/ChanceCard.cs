@@ -6,10 +6,10 @@ namespace MonopolySimulator
 {
     class ChanceCard : Card
     {
-        public ChanceCard(String name, Byte moveCount) : base(name, moveCount)
+        public ChanceCard(String name, int moveToIndex) : base(name, moveToIndex)
         {
             Name = name;
-            MoveCount = moveCount;
+            MoveToIndex = moveToIndex;
         }
 
     }

@@ -22,7 +22,7 @@ namespace MonopolySimulator
                 game.PlayTurn(GamePlayers.First.Value);
                 game.SwapPlayers(GamePlayers);
                 Console.ReadKey();
-                if (game.TurnsPlayed >= 20)
+                if (game.TurnsPlayed >= 100)
                 {
                     game.PrintGameSummary();
                     break;

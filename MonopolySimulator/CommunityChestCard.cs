@@ -6,10 +6,10 @@ namespace MonopolySimulator
 {
     class CommunityChestCard : Card
     {
-        public CommunityChestCard(String name, Byte moveCount) : base(name, moveCount)
+        public CommunityChestCard(String name, int moveToIndex) : base(name, moveToIndex)
         {
             Name = name;
-            MoveCount = moveCount;
+            MoveToIndex = moveToIndex;
         }
     }
 }

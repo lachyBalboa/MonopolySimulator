@@ -41,7 +41,7 @@ namespace MonopolySimulator
             CurrentIndex += SpacesToMove;
         }
 
-        public void Move(Byte spacesToMove, ref MonopolyBoard board)
+        public void Move(Byte spacesToMove, MonopolyBoard board)
         {
             this.CurrentIndex += spacesToMove;
             if (this.CurrentIndex >= board.Length)
@@ -65,9 +65,10 @@ namespace MonopolySimulator
 
 
 
-        public void MoveIndex(Byte index)
+        public void MoveIndex(Byte index, MonopolyBoard board)
         {
             CurrentIndex = index;
+            this.CurrentSpace = board.Spaces[CurrentIndex];
         }
 
         public Byte RollDice()
@@ -111,11 +112,11 @@ namespace MonopolySimulator
             //// Implement propery strategy? CheckIfBuy();
             //else if (currentSpace.SpaceType.Equals("Tax"))
             //    this.Move(0, board);
-            if (currentSpace.SpaceType.Equals("Go To Jail"))
-            {
-                this.MoveIndex(10);
-                this.IsInJail = true;
-            }
+            //if (currentSpace.SpaceType.Equals("Go To Jail"))
+            //{
+            //    this.MoveIndex(10);
+            //    this.IsInJail = true;
+            //}
 
             board.AddPlayerToSpace(this);
         }

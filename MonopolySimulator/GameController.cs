@@ -53,8 +53,8 @@ namespace MonopolySimulator
                     break;
                 }
 
-                player.Move(rollValue, ref Board);
-                player.CheckPosition(Board);
+                player.Move(rollValue, Board);
+                CheckPlayerPosition(player);
 
                 if (player.HasRolledDoubles)
                 {
@@ -73,6 +73,25 @@ namespace MonopolySimulator
         {
             Space currentSpace = Board.Spaces[player.CurrentIndex];
             return currentSpace;
+        }
+
+        public void CheckPlayerPosition(Player player)
+        {
+            Space currentSpace = Board.Spaces[player.CurrentIndex];
+            
+            if (currentSpace.SpaceType.Equals("Chance"))
+            {
+                Card drawnCard = ChanceDeck.DrawCard();
+                Console.WriteLine("Landed on Chance. Drew card: ");
+                Console.WriteLine(drawnCard.Name);
+                Console.Write("Moving To Space: ");
+                Console.WriteLine(Board.Spaces[drawnCard.MoveToIndex]);
+                Console.Write("At Index: ");
+                Console.Write(drawnCard.MoveToIndex);
+                player.MoveIndex((Byte)drawnCard.MoveToIndex, Board);
+            }
+
+
         }
 
         public void SwapPlayers(LinkedList<Player> players)
