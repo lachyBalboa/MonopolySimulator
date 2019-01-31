@@ -8,6 +8,7 @@ namespace MonopolySimulator
     {
         static void Main(string[] args)
         {
+            Console.Title = "Monopoly Simulator";
             //ChanceDeck deck = new ChanceDeck();
             //deck.SwapCards();
             LinkedList<Player> GamePlayers = new LinkedList<Player>();
